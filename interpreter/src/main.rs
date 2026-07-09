@@ -242,3 +242,21 @@ fn run(line: &str, env: &mut HashMap<String, f64>) -> Result<f64, String> {
     let ast = parser.parse_expr()?;
     eval(&ast, env).map_err(|e| format!("{e:?}"))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn evaluates_precedence() {
+        let mut env = HashMap::new();
+        let result = run("2 + 3 * 4", &mut env).unwrap();
+        assert_eq!(result, 14.0);
+    }
+
+    #[test]
+    fn rejects_division_by_zero() {
+        let mut env = HashMap::new();
+        assert!(run("1 / 0", &mut env).is_err());
+    }
+}
