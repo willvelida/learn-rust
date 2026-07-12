@@ -1,0 +1,8 @@
+[package]
+name = "async_programming"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1.52.3", features = ["full"] }
+tokio-stream = "0.1.18"
